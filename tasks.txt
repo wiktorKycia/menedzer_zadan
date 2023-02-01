@@ -1,2 +1,4 @@
 linia1
 linia2
+to jest trzecie zadanie
+a to czwarte
