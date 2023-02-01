@@ -18,7 +18,7 @@ def show_tasks():
         frame.pack(fill=X)
         global label1
         label1 = Label(frame, text=str(i+1)+": ", padx=10, height=20)
-
+        label1.grid(row=0, column=0)
 
 show_tasks()
 
