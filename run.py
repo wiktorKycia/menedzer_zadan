@@ -13,8 +13,10 @@ def import_from_file(file_name):
 def show_tasks():
     import_from_file("tasks.txt")
     global frame
-    frame = Frame(root, height=50, relief=RAISED, borderwidth=5)
-    frame.pack(fill=X)
+    for i, task in enumerate(list_of_tasks):
+        frame = Frame(root, height=100, relief=RAISED, borderwidth=5)
+        frame.pack(fill=X)
+
 
 show_tasks()
 
