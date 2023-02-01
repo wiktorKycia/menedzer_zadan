@@ -26,6 +26,9 @@ def show_tasks():
         label2 = Label(frame, text=list_of_tasks[i])
         label2.pack()
 
+        global delete_button
+        delete_button = Button(frame, text="delete")
+        delete_button.pack(side=RIGHT)
 show_tasks()
 
 root.mainloop()
