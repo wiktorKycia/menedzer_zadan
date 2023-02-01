@@ -15,7 +15,7 @@ def show_tasks():
     global frame
     frame = Frame(root, height=50, relief=RAISED, borderwidth=5)
     frame.pack(fill=X)
-    
 
+show_tasks()
 
 root.mainloop()
