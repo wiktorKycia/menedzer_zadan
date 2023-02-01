@@ -39,14 +39,31 @@ def add_task():
     file.write(new_task+"\n")
     file.close()
     show_tasks()
+    show_adding()
+
+def show_adding():
+    global task_name
+    task_name = StringVar()
+    global entry
+    entry = Entry(root, textvariable=task_name)
+    entry.pack()
+    global plus
+    plus = Button(root, text="+", command=add_task)
+    plus.pack(after=entry)
 
 
+def clear_frames():
+    for i in frames_list:
+        i.destroy()
+
+def clear_adding():
+    entry.destroy()
+    plus.destroy()
+
+    
 show_tasks()
+show_adding()
 
 
-task_name = StringVar()
-entry = Entry(root, textvariable=task_name).pack()
-plus = Button(root, text="+", command=add_task)
-plus.pack(after=entry)
 
 root.mainloop()
