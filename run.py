@@ -33,20 +33,15 @@ def show_tasks():
         delete_button.pack(side=RIGHT)
 
 
-def add_task():
-    file = open("tasks.txt", "a+")
-    new_task = str(task_name)
-    file.write(new_task+"\n")
-    file.close()
-    show_tasks()
-    show_adding()
 
 def show_adding():
     global task_name
     task_name = StringVar()
+
     global entry
     entry = Entry(root, textvariable=task_name)
     entry.pack()
+
     global plus
     plus = Button(root, text="+", command=add_task)
     plus.pack(after=entry)
@@ -56,14 +51,24 @@ def clear_frames():
     for i in frames_list:
         i.destroy()
 
+
 def clear_adding():
     entry.destroy()
     plus.destroy()
 
-    
+
+def add_task():
+    file = open("tasks.txt", "a+")
+    new_task = str(task_name)
+    file.write(new_task+"\n")
+    file.close()
+    clear_frames()
+    clear_adding()
+    show_tasks()
+    show_adding()
+
+
 show_tasks()
 show_adding()
-
-
 
 root.mainloop()
