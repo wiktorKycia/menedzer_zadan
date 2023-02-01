@@ -16,6 +16,8 @@ def show_tasks():
     for i, task in enumerate(list_of_tasks):
         frame = Frame(root, height=100, relief=RAISED, borderwidth=5)
         frame.pack(fill=X)
+        global label1
+        label1 = Label(frame, text=str(i+1)+": ", padx=10, height=20)
 
 
 show_tasks()
