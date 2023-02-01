@@ -52,7 +52,7 @@ def show_tasks():
 
         global delete_button
         delete_button = Button(frame, text="delete")
-        delete_button.place(in_=frame, x=120, y=0)
+        delete_button.place(in_=frame, x=190, y=6)
 
 
 def show_adding():
