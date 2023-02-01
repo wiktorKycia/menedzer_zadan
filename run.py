@@ -24,7 +24,7 @@ def show_tasks():
 
         global label2
         label2 = Label(frame, text=list_of_tasks[i])
-        label2.pack(after=label1)
+        label2.pack()
 
 show_tasks()
 
