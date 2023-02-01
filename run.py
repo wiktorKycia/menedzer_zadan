@@ -1,6 +1,6 @@
 from tkinter import *
 
-root = Tk()
+root = Tk()# zrobć menu z ustawieniami, opcje wyświetlają się w navie
 
 # SIZES
 main_frame_width = 300
@@ -44,15 +44,15 @@ def show_tasks():
 
         global label1
         label1 = Label(frame, text=str(i+1)+": ", padx=10)
-        label1.place(in_=frame, x=10, y=0)
+        label1.place(x=0, y=0)
 
         global label2
         label2 = Label(frame, text=task)
-        label2.place(in_=frame, x=30, y=0)
+        label2.place(x=30, y=0)# gdzieś tak pod labelem przycisk more_info
 
         global delete_button
         delete_button = Button(frame, text="delete")
-        delete_button.place(in_=frame, x=190, y=6)
+        delete_button.place(x=190, y=6)
 
 
 def show_adding():
@@ -78,7 +78,8 @@ def clear_adding():
     plus.destroy()
 
 
-def add_task():
+def add_task():# entry to nazwa zadania, zrobić jeszcze, text, który będzie opisem zadania, który będziemożna rozwijać
+    # w framie z konkretnym zadaniem zadaniem (przycisk more_info), opis będzie się wyświetlał w nav'ie
     file = open("tasks.txt", "a+")
     new_task = str(task_name)
     file.write(new_task+"\n")
