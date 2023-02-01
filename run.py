@@ -1,7 +1,9 @@
 from tkinter import *
 
 root = Tk()
-root.geometry("500x500")
+main_height = 800
+main_width = 500
+root.geometry(str(main_width)+"x"+str(main_height))
 frames_list = []
 
 
@@ -16,21 +18,21 @@ def show_tasks():
     import_from_file("tasks.txt")
     global frame
     for i, task in enumerate(list_of_tasks):
-        frame = Frame(root, height=100, relief=RAISED, borderwidth=5)
-        frame.pack(fill=X)
+        frame = Frame(root, height=50, width=250, relief=RAISED, borderwidth=5)
+        frame.pack(side=LEFT)
         frames_list.append(frame)
 
         global label1
         label1 = Label(frame, text=str(i+1)+": ", padx=10)
-        label1.pack(side=LEFT)
+        label1.place(in_=frame, x=10, y=0)
 
         global label2
         label2 = Label(frame, text=task)
-        label2.pack()
+        label2.place(in_=frame, x=30, y=0)
 
         global delete_button
         delete_button = Button(frame, text="delete")
-        delete_button.pack(side=RIGHT)
+        delete_button.place(in_=frame, x=120, y=0)
 
 
 
