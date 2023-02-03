@@ -7,10 +7,8 @@ window.geometry("430x160")  # ustawienie wymiarów okna
 window.title("Przykładowy program")  # ustawienie tytułu okna
 
 labelDescription = tk.StringVar()  # zminna, która będzie ustawiała tekst wypisywany w kontrolkach
-label = tk.Label(window,
-                 textvariable=labelDescription)  # tworzenie kontrolki Label z ustawieniem wyświetlania tekstu zawartego w zmiennej typu StringVar
-labelDescription.set(
-    "Przykładowy label:")  # ustawienie tekstu zawartego w zmiennej oraz (jednocześnie) w kontrolce label
+label = tk.Label(window, textvariable=labelDescription)  # tworzenie kontrolki Label z ustawieniem wyświetlania tekstu zawartego w zmiennej typu StringVar
+labelDescription.set("Przykładowy label:")  # ustawienie tekstu zawartego w zmiennej oraz (jednocześnie) w kontrolce label
 
 label.pack()  # wstawianie kontrolki do okna głównego
 label.place(x=10, y=10)  # zmiana położenia kontrolki w oknie
@@ -43,8 +41,7 @@ def listboxSelect(index):  # to będzie funkcja, którą podepnę pod zdarzenie 
         ct_listbox.curselection()))  # tutaj wyciągam tekst zaznaczenie i wstawiam go do zmiennej labelDescription co powoduje wyświetlenie tego tekstu w kontrolkach Entry i Label
 
 
-for item in ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota",
-             "Niedziela"]:  # iteruję po elementach listy
+for item in ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"]:  # iteruję po elementach listy
     ct_listbox.insert(tk.END, item)  # wstawiam je kolejno do listbox-a
 ct_listbox.bind('<<ListboxSelect>>', listboxSelect)  # łączę zdarzenie zmiany zaznaczenia z funkcją listboxSelect
 

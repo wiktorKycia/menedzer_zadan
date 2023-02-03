@@ -56,7 +56,7 @@ def show_tasks():
     import_from_file("tasks.txt")
     global frame
     for i, task in enumerate(list_of_tasks):
-        frame = Frame(task_frame, height=50, width=250, relief=RAISED, borderwidth=5)
+        frame = Frame(main_frame, height=50, width=250, relief=RAISED, borderwidth=5)
         frame.pack()
         frames_list.append(frame)
 
