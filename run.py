@@ -34,8 +34,14 @@ mainmenu.add_cascade(label='Options', menu=opt_menu)
 settings_menu = Menu(mainmenu)
 mainmenu.add_cascade(label='Setttings', menu=settings_menu)
 
+opt_menu.add_command(label='Add task')
+opt_menu.add_command(label='Remove task')
+opt_menu.add_separator()
+opt_menu.add_command(label='Show tasks in text window')
 
-
+settings_menu.add_checkbutton(label='Show options in window')
+settings_menu.add_command(label='Color settings')
+settings_menu.add_command(label='Layout settings')
 
 # FUNCTIONS
 def import_from_file(file_name):
