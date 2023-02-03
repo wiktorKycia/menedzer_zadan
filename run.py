@@ -14,8 +14,7 @@ root.geometry(str(main_width)+"x"+str(main_height))
 # LISTS
 frames_list = []
 
-
-# PANELS
+# PANEL
 panedwindow = PanedWindow(root, orient=HORIZONTAL)
 panedwindow.pack(fill=BOTH, expand=True)
 
@@ -24,6 +23,18 @@ main_frame = Frame(panedwindow, width=main_frame_width, height=main_frame_height
 nav = Frame(panedwindow, width=nav_width, height=nav_height, relief=SUNKEN, borderwidth=5)
 panedwindow.add(main_frame)
 panedwindow.add(nav)
+
+# MENUS
+mainmenu = Menu()
+root.config(menu=mainmenu)
+
+opt_menu = Menu(mainmenu)
+mainmenu.add_cascade(label='Options', menu=opt_menu)
+
+settings_menu = Menu(mainmenu)
+mainmenu.add_cascade(label='Setttings', menu=settings_menu)
+
+
 
 
 # FUNCTIONS
