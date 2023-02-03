@@ -23,5 +23,7 @@ def import_from_file(file_name):
 
 
 import_from_file('tasks.txt')
+# zrobić funkcje pokaż, która wypisuje zadania z list_od_tasks w listboxie
+# buttony: edit_task, add_task, remove_task
 
 root.mainloop()
