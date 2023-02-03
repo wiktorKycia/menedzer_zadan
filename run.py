@@ -24,12 +24,6 @@ nav = Frame(panedwindow, width=nav_width, height=nav_height, relief=SUNKEN, bord
 panedwindow.add(main_frame)
 panedwindow.add(nav)
 
-task_frame = Frame(main_frame, height=main_frame_height, yscrollcommand=scroll.set)
-scroll_frame = Frame(main_frame, height=main_frame_height)
-task_frame.pack(side=LEFT)
-scroll_frame.pack(side=RIGHT)
-
-
 # MENUS
 mainmenu = Menu()
 root.config(menu=mainmenu)
@@ -49,11 +43,6 @@ settings_menu.add_checkbutton(label='Show options in window')
 settings_menu.add_command(label='Color settings')
 settings_menu.add_command(label='Layout settings')
 
-# SCROLL
-scroll = Scrollbar(scroll_frame)
-scroll.pack(side=RIGHT, fill=Y)
-task_frame = Frame(main_frame, height=main_frame_height, yscrollcommand=scroll.set)
-scroll.config(command=task_frame.yview)
 
 # FUNCTIONS
 def import_from_file(file_name):
