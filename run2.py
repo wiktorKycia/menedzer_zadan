@@ -12,7 +12,7 @@ label.pack()
 label.place(x=10, y=10)
 
 entry_var = StringVar(root)
-entry_var.set('type task name')
+entry_var.set('type task name...')
 edit = Entry(root, textvariable=entry_var)
 edit.pack()
 edit.place(x=10, y=30, width=150)
@@ -22,7 +22,7 @@ list_label = Label(root, text='Here is your list of tasks')
 list_label.pack()
 list_label.place(x=10, y=60)
 
-listbox = Listbox(root, width=50, height=4)
+listbox = Listbox(root, width=50, height=6)
 listbox.pack()
 listbox.place(x=10, y=80)
 
@@ -71,8 +71,13 @@ def clear_all_tasks():
     show_tasks()
 
 
-# buttony: edit_task,
+def listboxSelect(index):
+    entry_var.set(listbox.get(listbox.curselection()))
 
+
+# Opis zadań, pole textowe przy dodawaniu zadań
+
+listbox.bind('<<ListboxSelect>>', listboxSelect)
 show_tasks()
 
 root.mainloop()
