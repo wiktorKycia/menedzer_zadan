@@ -20,8 +20,7 @@ edit.place(x=10, y=30)  # zmiana położenia kontrolki w oknie głównym
 
 
 def buttonClicked():  # zdarzenie związane z kliknięciem przycisku
-    labelDescription.set(
-        dt.datetime.now())  # tutaj ustawiam zawartość zmiennej labelDescription i jednocześnie zmieniam tekst wyświetlany w kontrolce Label
+    labelDescription.set(dt.datetime.now())  # tutaj ustawiam zawartość zmiennej labelDescription i jednocześnie zmieniam tekst wyświetlany w kontrolce Label
 
 
 button = tk.Button(window, text="Wczytaj bierzącą datę",
