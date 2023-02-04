@@ -62,13 +62,16 @@ def add_task():
     file.write(new_task+"\n")
     file.close()
     show_tasks()
-'''
-def clear_tasks():
-    file = open('tasks.txt', 'a+')
-    file.
-'''
 
-# buttony: edit_task, 
+
+def clear_all_tasks():
+    os.remove('tasks.txt')
+    file = open('tasks.txt', 'a+')
+    file.close()
+    show_tasks()
+
+
+# buttony: edit_task,
 
 show_tasks()
 
