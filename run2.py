@@ -26,6 +26,21 @@ listbox = Listbox(root, width=50, height=6)
 listbox.pack()
 listbox.place(x=10, y=80)
 
+# MENUS
+mainmenu = Menu()
+root.config(menu=mainmenu)
+
+opt_menu = Menu(mainmenu)
+mainmenu.add_cascade(label='Options', menu=opt_menu)
+
+settings_menu = Menu(mainmenu)
+mainmenu.add_cascade(label='Setttings', menu=settings_menu)
+
+opt_menu.add_command(label='Add task')
+opt_menu.add_command(label='Remove task')
+opt_menu.add_separator()
+opt_menu.add_command(label='Show tasks in text window')
+
 
 # FUNCTIONS
 def import_from_file(file_name):
