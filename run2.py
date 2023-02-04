@@ -91,8 +91,33 @@ def listboxSelect(index):
 
 
 # Opis zadań, pole textowe przy dodawaniu zadań
+'''
+Tutorial(menu) jak korzystać z menagera,
+messagebox zaimportować
+obsługa wyjątków
+(przy entry, jeśli nie ma takiego zadania w liście, lub pliku)
+'''
 
 listbox.bind('<<ListboxSelect>>', listboxSelect)
+
+# BUTTONS
+# Require new window
+add_task_button = Button(root, text='new task')
+''' 
+tworzy nowe okno, w którym użytkownik nadaje nazwę zadaniu i daje mu któtki opis, 
+label: 'enter task name:', 
+entry: ~nazwa zadania~, StringVar - przechwycony przez Button
+label: 'enter here description', 
+pole text: ~opis zadania~, - utworzyć oddzielny plik w folderze o nazwie ze StringVara i treści z opisu
+button: add task, - komenda add_task(), - zmodyfikować
+'''
+
+# Choose from the list
+remove_task_button = Button(root, text='remove task', command=remove_task) # obsłużyć wyjątek, jeżeli nie ma takiego zadania w liście - error
+read_description_button = Button(root, text='read description') # okno z labelami
+edit_task_button = Button(root, text='edit task') # okno z polem tekstowym jak przy dodawaniu zadań
+clear_all_tasks_button = Button(root, text='clear tasks list') # okno potwierdzające
+
 show_tasks()
 
 root.mainloop()
