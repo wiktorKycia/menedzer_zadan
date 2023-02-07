@@ -14,8 +14,22 @@ def import_from_file(file_name):
 
 def show_tasks():
     import_from_file('tasks.txt')
+    listbox.delete(0, END)
     for task in list_of_tasks:
         listbox.insert(END, task)
+
+
+def find_in_listbox():
+    import_from_file('tasks.txt')
+    task_name = entry_var.get()
+    index = None
+    for i, elem in enumerate(list_of_tasks):
+        if elem == task_name:
+            index = i
+    try:
+        listbox.see(index)
+    except TclError:
+        pass
 
 
 def remove_task():
@@ -34,13 +48,16 @@ def remove_task():
 
 def add_task():
     print('add_task() is running')
+
     file = open('tasks.txt', 'a+')
+
     new_task = entry_task_name_var.get()
+
     file.write(new_task+'\n')
     file.close()
     global description
     description = task_description.get(1.0, END)
-    file = open('files/{}'.format(new_task), 'a+')
+    file = open('files/{}.txt'.format(new_task), 'a+')
     file.writelines(description)
     file.close()
     show_tasks()
@@ -58,7 +75,7 @@ def show_adding_window():
     enter_name_label.place(x=10, y=10)
 
     global entry_task_name_var  # zmienna przechwytująca to co jest w entry
-    entry_task_name_var = StringVar()
+    entry_task_name_var = StringVar(master=window)
 
     global entry_task_name  # pole do wpisania nazwy zadania
     entry_task_name = Entry(window, textvariable=entry_task_name_var)
@@ -148,27 +165,30 @@ obsługa wyjątków
 listbox.bind('<<ListboxSelect>>', listbox_select)
 
 # BUTTONS
-# Require new window
+# Require new, confirming window
 add_task_button = Button(root, text='new task', command=show_adding_window)
+clear_all_tasks_button = Button(root, text='clear tasks list')  # okno potwierdzające
 
 # Choose from the list
+find_button = Button(root, text='find', command=find_in_listbox)
 remove_task_button = Button(root, text='remove task', command=remove_task)  # obsłużyć wyjątek, jeżeli nie ma takiego zadania w liście - error
 read_description_button = Button(root, text='read description')  # okno z labelami
 edit_task_button = Button(root, text='edit task')  # okno z polem tekstowym jak przy dodawaniu zadań
-clear_all_tasks_button = Button(root, text='clear tasks list')  # okno potwierdzające
+
 # packing
 add_task_button.pack()
 remove_task_button.pack()
 read_description_button.pack()
 edit_task_button.pack()
 clear_all_tasks_button.pack()
+find_button.pack()
 # placeing
 add_task_button.place(x=325, y=10)
 remove_task_button.place(x=325, y=40)
 read_description_button.place(x=325, y=70)
 edit_task_button.place(x=325, y=100)
 clear_all_tasks_button.place(x=325, y=130)
-
+find_button.place(x=165, y=25)
 show_tasks()
 
 root.mainloop()

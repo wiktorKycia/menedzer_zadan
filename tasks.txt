@@ -1,14 +1,7 @@
-linia1
 linia2
 to jest trzecie zadanie
 a to czwarte
 nauka
 podlac kwiaty
 JavaScript
-PY_VAR2
-PY_VAR2
-
-
-
-
-
+task_name
