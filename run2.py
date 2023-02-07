@@ -71,16 +71,12 @@ def remove_task():
 
 def add_task():
     print('add_task() is running')
-    window.quit()
-    '''
-    import_from_file('tasks.txt')
-    new_task = str(entry_var)
-    list_of_tasks.append(new_task)
     file = open('tasks.txt', 'a+')
-    file.write(new_task+"\n")
+    new_task = str(entry_task_name_var)
+    file.write(new_task+'\n')
     file.close()
     show_tasks()
-'''
+    window.destroy()
 
 
 def show_adding_window():
@@ -143,14 +139,7 @@ listbox.bind('<<ListboxSelect>>', listbox_select)
 # BUTTONS
 # Require new window
 add_task_button = Button(root, text='new task', command=show_adding_window)
-''' 
-tworzy nowe okno, w którym użytkownik nadaje nazwę zadaniu i daje mu któtki opis, 
-label: 'enter task name:', 
-entry: ~nazwa zadania~, StringVar - przechwycony przez Button
-label: 'enter here description', 
-pole text: ~opis zadania~, - utworzyć oddzielny plik w folderze o nazwie ze StringVara i treści z opisu
-button: add task, - komenda add_task(), - zmodyfikować
-'''
+
 
 # Choose from the list
 remove_task_button = Button(root, text='remove task', command=remove_task)  # obsłużyć wyjątek, jeżeli nie ma takiego zadania w liście - error
