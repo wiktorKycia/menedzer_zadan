@@ -4,39 +4,6 @@ import os
 root = Tk()
 root.geometry("500x200")
 
-# WIDGETS
-# Entry
-label_var = StringVar(root, 'Find in the list or type here: ')
-label = Label(root, textvariable=label_var)
-label.pack()
-label.place(x=10, y=10)
-
-entry_var = StringVar(root)
-entry_var.set('type task name...')
-edit = Entry(root, textvariable=entry_var)
-edit.pack()
-edit.place(x=10, y=30, width=150)
-
-# Listbox
-list_label = Label(root, text='Here is your list of tasks')
-list_label.pack()
-list_label.place(x=10, y=60)
-
-listbox = Listbox(root, width=50, height=6)
-listbox.pack()
-listbox.place(x=10, y=80)
-
-# MENUS
-mainmenu = Menu()
-root.config(menu=mainmenu)
-
-opt_menu = Menu(mainmenu)
-mainmenu.add_cascade(label='Options', menu=opt_menu)
-
-settings_menu = Menu(mainmenu)
-mainmenu.add_cascade(label='Settings', menu=settings_menu)
-
-
 # FUNCTIONS
 def import_from_file(file_name):
     file = open(file_name, "r")
@@ -127,6 +94,38 @@ def listbox_select(index):
     entry_var.set(listbox.get(listbox.curselection()))
 
 
+# WIDGETS
+# Entry
+label_var = StringVar(root, 'Find in the list or type here: ')
+label = Label(root, textvariable=label_var)
+label.pack()
+label.place(x=10, y=10)
+
+entry_var = StringVar(root)
+entry_var.set('type task name...')
+edit = Entry(root, textvariable=entry_var)
+edit.pack()
+edit.place(x=10, y=30, width=150)
+
+# Listbox
+list_label = Label(root, text='Here is your list of tasks')
+list_label.pack()
+list_label.place(x=10, y=60)
+
+listbox = Listbox(root, width=50, height=6)
+listbox.pack()
+listbox.place(x=10, y=80)
+
+# MENUS
+mainmenu = Menu()
+root.config(menu=mainmenu)
+
+opt_menu = Menu(mainmenu)
+mainmenu.add_cascade(label='Options', menu=opt_menu)
+
+settings_menu = Menu(mainmenu)
+mainmenu.add_cascade(label='Settings', menu=settings_menu)
+
 opt_menu.add_command(label='Add task', command=show_adding_window)
 opt_menu.add_command(label='Remove task')
 opt_menu.add_separator()
@@ -155,8 +154,16 @@ edit_task_button = Button(root, text='edit task')  # okno z polem tekstowym jak 
 clear_all_tasks_button = Button(root, text='clear tasks list')  # okno potwierdzające
 
 add_task_button.pack()
-add_task_button.place(x=325, y=10)
+remove_task_button.pack()
+read_description_button.pack()
+edit_task_button.pack()
+clear_all_tasks_button.pack()
 
+add_task_button.place(x=325, y=10)
+remove_task_button.place(x=325, y=40)
+read_description_button.place(x=325, y=70)
+edit_task_button.place(x=325, y=100)
+clear_all_tasks_button.place(x=325, y=130)
 
 show_tasks()
 
