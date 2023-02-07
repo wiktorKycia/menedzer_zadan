@@ -79,6 +79,32 @@ def add_task():
     show_tasks()
 
 
+def show_adding_window():
+    global window
+    window = Tk()
+    window.title('Add a new task')
+    window.geometry('200x200')
+    global enter_name_label  # label do task name'a
+    enter_name_label = Label(window, text='Enter here task name: ')
+
+    global entry_task_name_var  # zmienna przechwytująca to co jest w entry
+    entry_task_name_var = StringVar()
+
+    global entry_task_name  # pole do wpisania nazwy zadania
+    entry_task_name = Entry(window, textvariable=entry_task_name_var)
+
+    global task_description_label  # label do pola na opis zadania
+    task_description_label = Label(window, text='Enter here task description: ')
+
+    global task_description  # pole opisowe zadania
+    task_description - Text(window)
+
+    global plus
+    plus = Button(window, text='add task', command=add_task)
+
+    window.mainloop()
+
+
 def clear_all_tasks():
     os.remove('tasks.txt')
     file = open('tasks.txt', 'a+')
@@ -86,7 +112,7 @@ def clear_all_tasks():
     show_tasks()
 
 
-def listboxSelect(index):
+def listbox_select(index):
     entry_var.set(listbox.get(listbox.curselection()))
 
 
@@ -98,7 +124,7 @@ obsługa wyjątków
 (przy entry, jeśli nie ma takiego zadania w liście, lub pliku)
 '''
 
-listbox.bind('<<ListboxSelect>>', listboxSelect)
+listbox.bind('<<ListboxSelect>>', listbox_select)
 
 # BUTTONS
 # Require new window
@@ -113,10 +139,10 @@ button: add task, - komenda add_task(), - zmodyfikować
 '''
 
 # Choose from the list
-remove_task_button = Button(root, text='remove task', command=remove_task) # obsłużyć wyjątek, jeżeli nie ma takiego zadania w liście - error
-read_description_button = Button(root, text='read description') # okno z labelami
-edit_task_button = Button(root, text='edit task') # okno z polem tekstowym jak przy dodawaniu zadań
-clear_all_tasks_button = Button(root, text='clear tasks list') # okno potwierdzające
+remove_task_button = Button(root, text='remove task', command=remove_task)  # obsłużyć wyjątek, jeżeli nie ma takiego zadania w liście - error
+read_description_button = Button(root, text='read description')  # okno z labelami
+edit_task_button = Button(root, text='edit task')  # okno z polem tekstowym jak przy dodawaniu zadań
+clear_all_tasks_button = Button(root, text='clear tasks list')  # okno potwierdzające
 
 show_tasks()
 
