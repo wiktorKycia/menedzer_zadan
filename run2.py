@@ -4,6 +4,96 @@ import os
 root = Tk()
 root.geometry("500x200")
 
+# FUNCTIONS
+def import_from_file(file_name):
+    file = open(file_name, "r")
+    global list_of_tasks
+    list_of_tasks = file.readlines()
+    file.close()
+
+
+def show_tasks():
+    import_from_file('tasks.txt')
+    for task in list_of_tasks:
+        listbox.insert(END, task)
+
+
+def remove_task():
+    import_from_file('tasks.txt')
+    task_name = entry_var.get()
+    for task in list_of_tasks:
+        if task == task_name:
+            list_of_tasks.remove(task)
+    os.remove('tasks.txt')
+    file = open('tasks.txt', 'a+')
+    for task in list_of_tasks:
+        file.write(task)
+    file.close()
+    show_tasks()
+
+
+def add_task():
+    print('add_task() is running')
+    file = open('tasks.txt', 'a+')
+    new_task = entry_task_name_var.get()
+    file.write(new_task+'\n')
+    file.close()
+    global description
+    description = task_description.get(1.0, END)
+    file = open('files/{}'.format(new_task), 'a+')
+    file.writelines(description)
+    file.close()
+    show_tasks()
+    window.destroy()
+
+
+def show_adding_window():
+    global window
+    window = Tk()
+    window.title('Add a new task')
+    window.geometry('300x200')
+    global enter_name_label  # label do task name'a
+    enter_name_label = Label(window, text='Enter here task name: ')
+    enter_name_label.pack()
+    enter_name_label.place(x=10, y=10)
+
+    global entry_task_name_var  # zmienna przechwytująca to co jest w entry
+    entry_task_name_var = StringVar()
+
+    global entry_task_name  # pole do wpisania nazwy zadania
+    entry_task_name = Entry(window, textvariable=entry_task_name_var)
+    entry_task_name.pack()
+    entry_task_name.place(x=10, y=30)
+
+    global task_description_label  # label do pola na opis zadania
+    task_description_label = Label(window, text='Enter here task description: ')
+    task_description_label.pack()
+    task_description_label.place(x=10, y=50)
+
+    global task_description  # pole opisowe zadania
+    task_description = Text(window, width=130, height=280,)
+    task_description.pack()
+    task_description.place(x=10, y=70)
+
+    global plus  # przycisk dodający zadanie
+    plus = Button(window, text='add task', command=add_task)
+    plus.pack(side=BOTTOM)
+    plus.place(x=220, y=10)
+
+    window.mainloop()
+
+
+def clear_all_tasks():
+    os.remove('tasks.txt')
+    file = open('tasks.txt', 'a+')
+    file.close()
+    show_tasks()
+
+
+def listbox_select(index):
+    entry_var.set(listbox.get(listbox.curselection()))
+
+
 # WIDGETS
 # Entry
 label_var = StringVar(root, 'Find in the list or type here: ')
@@ -34,60 +124,17 @@ opt_menu = Menu(mainmenu)
 mainmenu.add_cascade(label='Options', menu=opt_menu)
 
 settings_menu = Menu(mainmenu)
-mainmenu.add_cascade(label='Setttings', menu=settings_menu)
+mainmenu.add_cascade(label='Settings', menu=settings_menu)
 
-opt_menu.add_command(label='Add task')
+opt_menu.add_command(label='Add task', command=show_adding_window)
+opt_menu.add_command(label='Remove task')
+opt_menu.add_command(label='Read description about the task')
+opt_menu.add_command(label='Edit task')
 opt_menu.add_command(label='Remove task')
 opt_menu.add_separator()
 opt_menu.add_command(label='Show tasks in text window')
-
-
-# FUNCTIONS
-def import_from_file(file_name):
-    file = open(file_name, "r")
-    global list_of_tasks
-    list_of_tasks = file.readlines()
-    file.close()
-
-
-def show_tasks():
-    import_from_file('tasks.txt')
-    for task in list_of_tasks:
-        listbox.insert(END, task)
-
-
-def remove_task():
-    import_from_file('tasks.txt')
-    task_name = str(entry_var)
-    for task in list_of_tasks:
-        if task == task_name:
-            list_of_tasks.remove(task)
-    os.remove('tasks.txt')
-    file = open('tasks.txt', 'a+')
-    for task in list_of_tasks:
-        file.write(task)
-    show_tasks()
-
-
-def add_task():
-    import_from_file('tasks.txt')
-    new_task = str(entry_var)
-    list_of_tasks.append(new_task)
-    file = open('tasks.txt', 'a+')
-    file.write(new_task+"\n")
-    file.close()
-    show_tasks()
-
-
-def clear_all_tasks():
-    os.remove('tasks.txt')
-    file = open('tasks.txt', 'a+')
-    file.close()
-    show_tasks()
-
-
-def listboxSelect(index):
-    entry_var.set(listbox.get(listbox.curselection()))
+opt_menu.add_separator()
+opt_menu.add_command(label='clear all tasks')
 
 
 # Opis zadań, pole textowe przy dodawaniu zadań
@@ -98,25 +145,29 @@ obsługa wyjątków
 (przy entry, jeśli nie ma takiego zadania w liście, lub pliku)
 '''
 
-listbox.bind('<<ListboxSelect>>', listboxSelect)
+listbox.bind('<<ListboxSelect>>', listbox_select)
 
 # BUTTONS
 # Require new window
-add_task_button = Button(root, text='new task')
-''' 
-tworzy nowe okno, w którym użytkownik nadaje nazwę zadaniu i daje mu któtki opis, 
-label: 'enter task name:', 
-entry: ~nazwa zadania~, StringVar - przechwycony przez Button
-label: 'enter here description', 
-pole text: ~opis zadania~, - utworzyć oddzielny plik w folderze o nazwie ze StringVara i treści z opisu
-button: add task, - komenda add_task(), - zmodyfikować
-'''
+add_task_button = Button(root, text='new task', command=show_adding_window)
 
 # Choose from the list
-remove_task_button = Button(root, text='remove task', command=remove_task) # obsłużyć wyjątek, jeżeli nie ma takiego zadania w liście - error
-read_description_button = Button(root, text='read description') # okno z labelami
-edit_task_button = Button(root, text='edit task') # okno z polem tekstowym jak przy dodawaniu zadań
-clear_all_tasks_button = Button(root, text='clear tasks list') # okno potwierdzające
+remove_task_button = Button(root, text='remove task', command=remove_task)  # obsłużyć wyjątek, jeżeli nie ma takiego zadania w liście - error
+read_description_button = Button(root, text='read description')  # okno z labelami
+edit_task_button = Button(root, text='edit task')  # okno z polem tekstowym jak przy dodawaniu zadań
+clear_all_tasks_button = Button(root, text='clear tasks list')  # okno potwierdzające
+# packing
+add_task_button.pack()
+remove_task_button.pack()
+read_description_button.pack()
+edit_task_button.pack()
+clear_all_tasks_button.pack()
+# placeing
+add_task_button.place(x=325, y=10)
+remove_task_button.place(x=325, y=40)
+read_description_button.place(x=325, y=70)
+edit_task_button.place(x=325, y=100)
+clear_all_tasks_button.place(x=325, y=130)
 
 show_tasks()
 
