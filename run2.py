@@ -106,20 +106,10 @@ def show_adding_window():
     task_description_label.pack()
     task_description_label.place(x=10, y=50)
 
-    global task_description_frame  # ramka pola opisowego
-    task_description_frame = Frame(window, height=130, width=280)
-    task_description_frame.pack()
-    task_description_frame.place(x=10, y=70)
-
-    global task_description_scroll
-    task_description_scroll = Scrollbar()
-    task_description_scroll.pack(side=RIGHT, fill=Y)
-
     global task_description  # pole opisowe zadania
-    task_description = Text(task_description_frame, width=130, height=280, yscrollcommand=task_description_scroll.set)
+    task_description = Text(window, width=130, height=280,)
     task_description.pack()
-
-    task_description_scroll.config(command=task_description.yview)
+    task_description.place(x=10, y=70)
 
     global plus  # przycisk dodający zadanie
     plus = Button(window, text='add task', command=add_task)
