@@ -128,8 +128,13 @@ mainmenu.add_cascade(label='Settings', menu=settings_menu)
 
 opt_menu.add_command(label='Add task', command=show_adding_window)
 opt_menu.add_command(label='Remove task')
+opt_menu.add_command(label='Read description about the task')
+opt_menu.add_command(label='Edit task')
+opt_menu.add_command(label='Remove task')
 opt_menu.add_separator()
 opt_menu.add_command(label='Show tasks in text window')
+opt_menu.add_separator()
+opt_menu.add_command(label='clear all tasks')
 
 
 # Opis zadań, pole textowe przy dodawaniu zadań
@@ -146,19 +151,18 @@ listbox.bind('<<ListboxSelect>>', listbox_select)
 # Require new window
 add_task_button = Button(root, text='new task', command=show_adding_window)
 
-
 # Choose from the list
 remove_task_button = Button(root, text='remove task', command=remove_task)  # obsłużyć wyjątek, jeżeli nie ma takiego zadania w liście - error
 read_description_button = Button(root, text='read description')  # okno z labelami
 edit_task_button = Button(root, text='edit task')  # okno z polem tekstowym jak przy dodawaniu zadań
 clear_all_tasks_button = Button(root, text='clear tasks list')  # okno potwierdzające
-
+# packing
 add_task_button.pack()
 remove_task_button.pack()
 read_description_button.pack()
 edit_task_button.pack()
 clear_all_tasks_button.pack()
-
+# placeing
 add_task_button.place(x=325, y=10)
 remove_task_button.place(x=325, y=40)
 read_description_button.place(x=325, y=70)
