@@ -70,6 +70,8 @@ def remove_task():
 
 
 def add_task():
+    print('add_task() is running')
+    '''
     import_from_file('tasks.txt')
     new_task = str(entry_var)
     list_of_tasks.append(new_task)
@@ -77,8 +79,7 @@ def add_task():
     file.write(new_task+"\n")
     file.close()
     show_tasks()
-
-
+'''
 def show_adding_window():
     global window
     window = Tk()
@@ -86,22 +87,26 @@ def show_adding_window():
     window.geometry('200x200')
     global enter_name_label  # label do task name'a
     enter_name_label = Label(window, text='Enter here task name: ')
+    enter_name_label.pack()
 
     global entry_task_name_var  # zmienna przechwytująca to co jest w entry
     entry_task_name_var = StringVar()
 
     global entry_task_name  # pole do wpisania nazwy zadania
     entry_task_name = Entry(window, textvariable=entry_task_name_var)
+    entry_task_name.pack()
 
     global task_description_label  # label do pola na opis zadania
     task_description_label = Label(window, text='Enter here task description: ')
+    task_description_label.pack()
 
     global task_description  # pole opisowe zadania
     task_description - Text(window)
+    task_description.pack()
 
     global plus
     plus = Button(window, text='add task', command=add_task)
-
+    plus.pack()
     window.mainloop()
 
 
@@ -128,7 +133,7 @@ listbox.bind('<<ListboxSelect>>', listbox_select)
 
 # BUTTONS
 # Require new window
-add_task_button = Button(root, text='new task')
+add_task_button = Button(root, text='new task', command=show_adding_window)
 ''' 
 tworzy nowe okno, w którym użytkownik nadaje nazwę zadaniu i daje mu któtki opis, 
 label: 'enter task name:', 
@@ -143,6 +148,10 @@ remove_task_button = Button(root, text='remove task', command=remove_task)  # ob
 read_description_button = Button(root, text='read description')  # okno z labelami
 edit_task_button = Button(root, text='edit task')  # okno z polem tekstowym jak przy dodawaniu zadań
 clear_all_tasks_button = Button(root, text='clear tasks list')  # okno potwierdzające
+
+add_task_button.pack()
+add_task_button.place(x=325, y=10)
+
 
 show_tasks()
 
