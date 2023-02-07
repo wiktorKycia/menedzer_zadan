@@ -71,6 +71,7 @@ def remove_task():
 
 def add_task():
     print('add_task() is running')
+    window.quit()
     '''
     import_from_file('tasks.txt')
     new_task = str(entry_var)
@@ -80,14 +81,17 @@ def add_task():
     file.close()
     show_tasks()
 '''
+
+
 def show_adding_window():
     global window
     window = Tk()
     window.title('Add a new task')
-    window.geometry('200x200')
+    window.geometry('300x200')
     global enter_name_label  # label do task name'a
     enter_name_label = Label(window, text='Enter here task name: ')
     enter_name_label.pack()
+    enter_name_label.place(x=10, y=10)
 
     global entry_task_name_var  # zmienna przechwytująca to co jest w entry
     entry_task_name_var = StringVar()
@@ -95,18 +99,33 @@ def show_adding_window():
     global entry_task_name  # pole do wpisania nazwy zadania
     entry_task_name = Entry(window, textvariable=entry_task_name_var)
     entry_task_name.pack()
+    entry_task_name.place(x=10, y=30)
 
     global task_description_label  # label do pola na opis zadania
     task_description_label = Label(window, text='Enter here task description: ')
     task_description_label.pack()
+    task_description_label.place(x=10, y=50)
+
+    global task_description_frame  # ramka pola opisowego
+    task_description_frame = Frame(window, height=130, width=280)
+    task_description_frame.pack()
+    task_description_frame.place(x=10, y=70)
+
+    global task_description_scroll
+    task_description_scroll = Scrollbar()
+    task_description_scroll.pack(side=RIGHT, fill=Y)
 
     global task_description  # pole opisowe zadania
-    task_description - Text(window)
+    task_description = Text(task_description_frame, width=130, height=280, yscrollcommand=task_description_scroll.set)
     task_description.pack()
 
-    global plus
+    task_description_scroll.config(command=task_description.yview)
+
+    global plus  # przycisk dodający zadanie
     plus = Button(window, text='add task', command=add_task)
-    plus.pack()
+    plus.pack(side=BOTTOM)
+    plus.place(x=220, y=10)
+
     window.mainloop()
 
 
