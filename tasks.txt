@@ -1,7 +1,0 @@
-linia2
-to jest trzecie zadanie
-a to czwarte
-nauka
-podlac kwiaty
-JavaScript
-task_name

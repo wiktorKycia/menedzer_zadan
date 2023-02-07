@@ -19,7 +19,7 @@ def show_tasks():
         listbox.insert(END, task)
 
 
-def find_in_listbox():
+def find_in_listbox():  # wyjątek jeśli nie ma zadania
     import_from_file('tasks.txt')
     task_name = entry_var.get()
     index = None
@@ -32,7 +32,7 @@ def find_in_listbox():
         pass
 
 
-def remove_task():
+def remove_task():  # wyjątek jeśli nie ma zadania
     import_from_file('tasks.txt')
     task_name = entry_var.get()
     for task in list_of_tasks:
@@ -48,11 +48,8 @@ def remove_task():
 
 def add_task():
     print('add_task() is running')
-
     file = open('tasks.txt', 'a+')
-
     new_task = entry_task_name_var.get()
-
     file.write(new_task+'\n')
     file.close()
     global description
@@ -101,9 +98,14 @@ def show_adding_window():
 
 
 def clear_all_tasks():
-    os.remove('tasks.txt')
-    file = open('tasks.txt', 'a+')
-    file.close()
+    open('tasks.txt', 'w').close()
+
+    for file in os.listdir('files'):
+        try:
+            os.remove(file)
+        except FileNotFoundError:
+            print("nie odnaleziono pliku")
+
     show_tasks()
 
 
@@ -167,7 +169,7 @@ listbox.bind('<<ListboxSelect>>', listbox_select)
 # BUTTONS
 # Require new, confirming window
 add_task_button = Button(root, text='new task', command=show_adding_window)
-clear_all_tasks_button = Button(root, text='clear tasks list')  # okno potwierdzające
+clear_all_tasks_button = Button(root, text='clear tasks list', command=clear_all_tasks)  # okno potwierdzające
 
 # Choose from the list
 find_button = Button(root, text='find', command=find_in_listbox)
@@ -182,7 +184,8 @@ read_description_button.pack()
 edit_task_button.pack()
 clear_all_tasks_button.pack()
 find_button.pack()
-# placeing
+
+# placing
 add_task_button.place(x=325, y=10)
 remove_task_button.place(x=325, y=40)
 read_description_button.place(x=325, y=70)
