@@ -34,12 +34,7 @@ opt_menu = Menu(mainmenu)
 mainmenu.add_cascade(label='Options', menu=opt_menu)
 
 settings_menu = Menu(mainmenu)
-mainmenu.add_cascade(label='Setttings', menu=settings_menu)
-
-opt_menu.add_command(label='Add task')
-opt_menu.add_command(label='Remove task')
-opt_menu.add_separator()
-opt_menu.add_command(label='Show tasks in text window')
+mainmenu.add_cascade(label='Settings', menu=settings_menu)
 
 
 # FUNCTIONS
@@ -58,7 +53,7 @@ def show_tasks():
 
 def remove_task():
     import_from_file('tasks.txt')
-    task_name = str(entry_var)
+    task_name = entry_var.get()
     for task in list_of_tasks:
         if task == task_name:
             list_of_tasks.remove(task)
@@ -66,14 +61,20 @@ def remove_task():
     file = open('tasks.txt', 'a+')
     for task in list_of_tasks:
         file.write(task)
+    file.close()
     show_tasks()
 
 
 def add_task():
     print('add_task() is running')
     file = open('tasks.txt', 'a+')
-    new_task = str(entry_task_name_var)
+    new_task = entry_task_name_var.get()
     file.write(new_task+'\n')
+    file.close()
+    global description
+    description = task_description.get(1.0, END)
+    file = open('files/{}'.format(new_task), 'a+')
+    file.writelines(description)
     file.close()
     show_tasks()
     window.destroy()
@@ -124,6 +125,12 @@ def clear_all_tasks():
 
 def listbox_select(index):
     entry_var.set(listbox.get(listbox.curselection()))
+
+
+opt_menu.add_command(label='Add task', command=show_adding_window)
+opt_menu.add_command(label='Remove task')
+opt_menu.add_separator()
+opt_menu.add_command(label='Show tasks in text window')
 
 
 # Opis zadań, pole textowe przy dodawaniu zadań

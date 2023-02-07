@@ -5,3 +5,9 @@ a to czwarte
 nauka
 podlac kwiaty
 JavaScript
+PY_VAR2
+PY_VAR2
+
+
+
+
