@@ -1,14 +1,18 @@
 from tkinter import *
 import os
+from tkinter import messagebox as msg
 
 root = Tk()
 root.geometry("500x200")
+
 
 # FUNCTIONS
 def import_from_file(file_name):
     file = open(file_name, "r")
     global list_of_tasks
-    list_of_tasks = file.readlines()
+    list_of_tasks = []
+    for line in file.readlines():
+        list_of_tasks.append(line.strip())
     file.close()
 
 
@@ -21,15 +25,25 @@ def show_tasks():
 
 def find_in_listbox():  # wyjątek jeśli nie ma zadania
     import_from_file('tasks.txt')
-    index = 7
-    task_name = entry_var.get() + "  "
+    index = 0
+    task_name = entry_var.get().strip()
+
+    '''
+    if task_name not in list_of_tasks:
+        print("ERROR")
+        # msg.showerror("Error", "There is no such task in the list")
+'''
     for i, elem in enumerate(list_of_tasks):
+        elem.strip()
         if elem == task_name:
             index = i
+    listbox.see(index)
+    '''if index == 0:
+        print("ERROR")
     try:
         listbox.see(index)
     except TclError as e:
-        print(e)
+        print(e)'''
 
 
 def remove_task():  # wyjątek jeśli nie ma zadania
@@ -192,6 +206,7 @@ read_description_button.place(x=325, y=70)
 edit_task_button.place(x=325, y=100)
 clear_all_tasks_button.place(x=325, y=130)
 find_button.place(x=165, y=25)
+
 show_tasks()
 
 root.mainloop()
