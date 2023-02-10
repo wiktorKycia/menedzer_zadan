@@ -21,15 +21,15 @@ def show_tasks():
 
 def find_in_listbox():  # wyjątek jeśli nie ma zadania
     import_from_file('tasks.txt')
-    task_name = entry_var.get()
-    index = None
+    index = 7
+    task_name = entry_var.get() + "  "
     for i, elem in enumerate(list_of_tasks):
         if elem == task_name:
             index = i
     try:
         listbox.see(index)
-    except TclError:
-        pass
+    except TclError as e:
+        print(e)
 
 
 def remove_task():  # wyjątek jeśli nie ma zadania
