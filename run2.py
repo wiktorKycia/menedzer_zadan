@@ -23,13 +23,19 @@ def show_tasks():
         listbox.insert(END, task)
 
 
-def find_in_listbox():  # wyjątek jeśli nie ma zadania
+def check_in_list(name):
+    if name not in list_of_tasks:
+        msg.showerror("Error", "There is no such task in the list")
+    else:
+        pass
+
+
+def find_in_listbox():
     import_from_file('tasks.txt')
     index = 0
     task_name = entry_var.get().strip()
 
-    if task_name not in list_of_tasks:
-        msg.showerror("Error", "There is no such task in the list")
+    check_in_list(task_name)
 
     for i, elem in enumerate(list_of_tasks):
         elem.strip()
@@ -41,10 +47,14 @@ def find_in_listbox():  # wyjątek jeśli nie ma zadania
 def remove_task():  # wyjątek jeśli nie ma zadania
     import_from_file('tasks.txt')
     task_name = entry_var.get()
+
+    check_in_list(task_name)
+
     for task in list_of_tasks:
         if task == task_name:
             list_of_tasks.remove(task)
     os.remove('tasks.txt')
+
     file = open('tasks.txt', 'a+')
     for task in list_of_tasks:
         file.write(task)
@@ -58,11 +68,13 @@ def add_task():
     new_task = entry_task_name_var.get()
     file.write(new_task+'\n')
     file.close()
+
     global description
     description = task_description.get(1.0, END)
     file = open('files/{}.txt'.format(new_task), 'a+')
     file.writelines(description)
     file.close()
+
     show_tasks()
     window.destroy()
 
@@ -72,6 +84,7 @@ def show_adding_window():
     window = Tk()
     window.title('Add a new task')
     window.geometry('300x200')
+
     global enter_name_label  # label do task name'a
     enter_name_label = Label(window, text='Enter here task name: ')
     enter_name_label.pack()
@@ -103,6 +116,10 @@ def show_adding_window():
     window.mainloop()
 
 
+def close_confirming():
+    window_c.destroy()
+
+
 def clear_all_tasks():
     open('tasks.txt', 'w').close()
 
@@ -113,6 +130,23 @@ def clear_all_tasks():
             print("nie odnaleziono pliku")
 
     show_tasks()
+    window_c.destroy()
+
+
+def show_confirming_window():
+    global window_c
+    window_c = Tk()
+
+    global info
+    info = Label(window_c, text='This operation will delete all the tasks from your list')
+
+    global cancel_button
+    cancel_button = Button(window_c, text='Cancel', command=close_confirming)
+
+    global confirm_button
+    confirm_button = Button(window_c, text='Confirm operation', command=clear_all_tasks)
+
+    window_c.mainloop()
 
 
 def listbox_select(index):
@@ -175,7 +209,7 @@ listbox.bind('<<ListboxSelect>>', listbox_select)
 # BUTTONS
 # Require new, confirming window
 add_task_button = Button(root, text='new task', command=show_adding_window)
-clear_all_tasks_button = Button(root, text='clear tasks list', command=clear_all_tasks)  # okno potwierdzające
+clear_all_tasks_button = Button(root, text='clear tasks list', command=show_confirming_window)  # okno potwierdzające
 
 # Choose from the list
 find_button = Button(root, text='find', command=find_in_listbox)
