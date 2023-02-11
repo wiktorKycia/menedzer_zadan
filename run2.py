@@ -57,13 +57,12 @@ def remove_task():  # wyjątek jeśli nie ma zadania
 
     file = open('tasks.txt', 'a+')
     for task in list_of_tasks:
-        file.write(task)
+        file.write(task+"\n")
     file.close()
     show_tasks()
 
 
 def add_task():
-    print('add_task() is running')
     file = open('tasks.txt', 'a+')
     new_task = entry_task_name_var.get()
     file.write(new_task+'\n')
