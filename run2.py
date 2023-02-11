@@ -28,22 +28,14 @@ def find_in_listbox():  # wyjątek jeśli nie ma zadania
     index = 0
     task_name = entry_var.get().strip()
 
-    '''
     if task_name not in list_of_tasks:
-        print("ERROR")
-        # msg.showerror("Error", "There is no such task in the list")
-'''
+        msg.showerror("Error", "There is no such task in the list")
+
     for i, elem in enumerate(list_of_tasks):
         elem.strip()
         if elem == task_name:
             index = i
     listbox.see(index)
-    '''if index == 0:
-        print("ERROR")
-    try:
-        listbox.see(index)
-    except TclError as e:
-        print(e)'''
 
 
 def remove_task():  # wyjątek jeśli nie ma zadania
