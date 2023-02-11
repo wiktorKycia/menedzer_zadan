@@ -53,12 +53,18 @@ def remove_task():  # wyjątek jeśli nie ma zadania
     for task in list_of_tasks:
         if task == task_name:
             list_of_tasks.remove(task)
-    os.remove('tasks.txt')
 
-    file = open('tasks.txt', 'a+')
+    file = open('tasks.txt', 'w')
     for task in list_of_tasks:
         file.write(task+"\n")
     file.close()
+
+    path = "./files/" + task_name + ".txt"
+    try:
+        os.remove(path)
+    except FileNotFoundError:
+        msg.showerror("ERROR", "File: {} does not exists".format(task_name))
+
     show_tasks()
 
 
