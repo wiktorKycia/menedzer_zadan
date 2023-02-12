@@ -1,6 +1,15 @@
-import os
+from tkinter import *
 
-list = os.listdir("./files/")
-print(list)
-print(os.path.exists("./files/task_name.txt"))
-os.remove("./files/task_name.txt")
+okno = Tk()
+
+
+def pokaz():
+    global window
+    window = Tk()
+
+    window.mainloop()
+    pokaz()
+
+
+pokaz()
+okno.mainloop()

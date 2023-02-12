@@ -115,7 +115,7 @@ def show_adding_window():
 
     global plus  # przycisk dodający zadanie
     plus = Button(window, text='add task', command=add_task)
-    plus.pack(side=BOTTOM)
+    plus.pack()
     plus.place(x=220, y=10)
 
     window.mainloop()
@@ -142,6 +142,7 @@ def show_confirming_window():
     global window_c
     window_c = Tk()
     window_c.geometry("300x100")
+    window_c.title('Delete all tasks')
 
     global info
     info = Label(window_c, text='This operation will delete all the tasks from your list')
@@ -161,8 +162,68 @@ def show_confirming_window():
     window_c.mainloop()
 
 
+def confirm_editing():
+    task_name = entry_new_task_name_var.get()
+    path1 = "./files/" + entry_var.get() + ".txt"
+    path2 = "./files/" + task_name + ".txt"
+    os.rename(path1, path2)
+
+    global new_description
+    new_description = new_task_description.get(1.0, END)
+
+    file = open(path2, "w+")
+    file.write(new_description)
+    file.close()
+    window_e.destroy()
+
+
 def edit_task():
-    pass
+    task_name = entry_var.get()
+    if task_name not in list_of_tasks:
+        msg.showerror("Error", "There is no such task in the list")
+    else:
+        global window_e
+        window_e = Tk()
+        window_e.geometry('300x200')
+
+        global enter_new_name_label
+        enter_new_name_label = Label(window_e, text='Enter here new task name: ')
+        enter_new_name_label.pack()
+        enter_new_name_label.place(x=10, y=10)
+
+        global entry_new_task_name_var
+        entry_new_task_name_var = StringVar(master=window_e)
+
+        global entry_new_task_name
+        entry_new_task_name = Entry(window_e, textvariable=entry_new_task_name_var)
+        entry_new_task_name.pack()
+        entry_new_task_name.place(x=10, y=30)
+
+        global new_task_description_label
+        new_task_description_label = Label(window_e, text='Enter here task description: ')
+        new_task_description_label.pack()
+        new_task_description_label.place(x=10, y=50)
+
+        global new_task_description
+        new_task_description = Text(window_e, width=130, height=280)
+        new_task_description.pack()
+        new_task_description.place(x=10, y=70)
+
+        global edit_e
+        edit_e = Button(window_e, text='edit task', command=confirm_editing)
+        edit_e.pack()
+        edit_e.place(x=220, y=10)
+
+        entry_new_task_name_var.set(task_name)
+
+        file_path = "./files/" + task_name + ".txt"
+        file = open(file_path, "r")
+        for line in file.readlines():
+            new_task_description.insert(END, line)
+
+        file.close()
+
+        window_e.mainloop()
 
 
 def listbox_select(index):
@@ -228,7 +289,7 @@ clear_all_tasks_button = Button(root, text='clear tasks list', command=show_conf
 # Choose from the list
 find_button = Button(root, text='find', command=find_in_listbox)
 remove_task_button = Button(root, text='remove task', command=remove_task)
-edit_task_button = Button(root, text='edit task')  # okno z polem tekstowym jak przy dodawaniu zadań
+edit_task_button = Button(root, text='edit task', command=edit_task)  # okno z polem tekstowym jak przy dodawaniu zadań
 
 # packing
 add_task_button.pack()
