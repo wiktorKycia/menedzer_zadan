@@ -154,24 +154,8 @@ def show_confirming_window():
     window_c.mainloop()
 
 
-def read_description():
-    global window_d
-    window_d = Tk()
-    task_name = entry_var.get()
-    file = open("./files/"+task_name+".txt", "r")
-    description = file.readlines()
+def edit_task():
 
-    global label_task_name_d
-    label_task_name_d = Label(window_d, text=task_name)
-    label_task_name_d.pack()
-    label_task_name_d.place(x=10, y=10)
-
-    global label_description_d
-    label_description_d = Label(window_d, text=description)
-    label_description_d.pack()
-    label_description_d.place(x=10, y=40)
-
-    window_d.mainloop()
 
 
 def listbox_select(index):
@@ -239,7 +223,6 @@ clear_all_tasks_button = Button(root, text='clear tasks list', command=show_conf
 # Choose from the list
 find_button = Button(root, text='find', command=find_in_listbox)
 remove_task_button = Button(root, text='remove task', command=remove_task)
-read_description_button = Button(root, text='read description')  # okno z labelami
 edit_task_button = Button(root, text='edit task')  # okno z polem tekstowym jak przy dodawaniu zadań
 
 # packing
