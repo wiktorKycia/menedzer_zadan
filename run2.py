@@ -141,21 +141,28 @@ def clear_all_tasks():
 def show_confirming_window():
     global window_c
     window_c = Tk()
+    window_c.geometry("300x100")
 
     global info
     info = Label(window_c, text='This operation will delete all the tasks from your list')
+    info.pack()
+    #info.place(x=10, y=10)
 
     global cancel_button
     cancel_button = Button(window_c, text='Cancel', command=close_confirming)
+    cancel_button.pack()
+    cancel_button.place(x=100, y=30)
 
     global confirm_button
-    confirm_button = Button(window_c, text='Confirm operation', command=clear_all_tasks)
+    confirm_button = Button(window_c, text='Confirm', command=clear_all_tasks)
+    confirm_button.pack()
+    confirm_button.place(x=150, y=30)
 
     window_c.mainloop()
 
 
 def edit_task():
-
+    pass
 
 
 def listbox_select(index):
@@ -195,14 +202,12 @@ settings_menu = Menu(mainmenu)
 mainmenu.add_cascade(label='Settings', menu=settings_menu)
 
 opt_menu.add_command(label='Add task', command=show_adding_window)
-opt_menu.add_command(label='Remove task')
-opt_menu.add_command(label='Read description about the task')
-opt_menu.add_command(label='Edit task')
-opt_menu.add_command(label='Remove task')
+opt_menu.add_command(label='Remove task', command=remove_task)
+opt_menu.add_command(label='Edit task', command=edit_task)
 opt_menu.add_separator()
 opt_menu.add_command(label='Show tasks in text window')
 opt_menu.add_separator()
-opt_menu.add_command(label='clear all tasks')
+opt_menu.add_command(label='clear all tasks', command=show_confirming_window)
 
 
 # Opis zadań, pole textowe przy dodawaniu zadań
@@ -228,7 +233,6 @@ edit_task_button = Button(root, text='edit task')  # okno z polem tekstowym jak 
 # packing
 add_task_button.pack()
 remove_task_button.pack()
-read_description_button.pack()
 edit_task_button.pack()
 clear_all_tasks_button.pack()
 find_button.pack()
@@ -236,9 +240,8 @@ find_button.pack()
 # placing
 add_task_button.place(x=325, y=10)
 remove_task_button.place(x=325, y=40)
-read_description_button.place(x=325, y=70)
-edit_task_button.place(x=325, y=100)
-clear_all_tasks_button.place(x=325, y=130)
+edit_task_button.place(x=325, y=70)
+clear_all_tasks_button.place(x=325, y=100)
 find_button.place(x=165, y=25)
 
 show_tasks()
