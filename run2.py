@@ -3,7 +3,7 @@ import os
 from tkinter import messagebox as msg
 
 root = Tk()
-root.geometry("500x200")
+root.geometry("450x200")
 
 
 # FUNCTIONS
@@ -192,7 +192,7 @@ def edit_task():
         enter_new_name_label.place(x=10, y=10)
 
         global entry_new_task_name_var
-        entry_new_task_name_var = StringVar(master=window_e)
+        entry_new_task_name_var = StringVar(window_e)
 
         global entry_new_task_name
         entry_new_task_name = Entry(window_e, textvariable=entry_new_task_name_var)
@@ -299,10 +299,10 @@ clear_all_tasks_button.pack()
 find_button.pack()
 
 # placing
-add_task_button.place(x=325, y=10)
-remove_task_button.place(x=325, y=40)
-edit_task_button.place(x=325, y=70)
-clear_all_tasks_button.place(x=325, y=100)
+add_task_button.place(x=325, y=10, width=100)
+remove_task_button.place(x=325, y=40, width=100)
+edit_task_button.place(x=325, y=70, width=100)
+clear_all_tasks_button.place(x=325, y=100, width=100)
 find_button.place(x=165, y=25)
 
 show_tasks()
